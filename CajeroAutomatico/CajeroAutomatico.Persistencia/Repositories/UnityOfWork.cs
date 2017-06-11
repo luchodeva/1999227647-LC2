@@ -1,10 +1,11 @@
 ﻿
-using CajeroAutomatico1.Entidades.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CajeroAutomatico.Entities.Entities;
+using CajeroAutomatico.Entities.IRepositories;
 
 namespace CajeroAutomatico.Persistencia.Repositories
 {
@@ -12,24 +13,45 @@ namespace CajeroAutomatico.Persistencia.Repositories
     {
 
         private readonly CajeroAutomaticoDBContext _Context;
-        private static UnityOfWork _Instance;
+
+        /*private static UnityOfWork _Instance;
         private static readonly object _Lock = new object();
+        */
 
 
-        public ICuentaRepository Cuenta { get; private set; }
-        public IRetiroRepository Retiro { get; private set; }
+        public IClienteRepository Clientes  {get; private set; }
 
+        public ICuentaRepository Cuentas { get; private set; }
 
-        private UnityOfWork(){
+        public IDispensadorEfectivoRepository DispensadorEfectivos { get; private set; }
 
-            _Context = new CajeroAutomaticoDBContext();
+        public IRetiroRepository Retiros { get; private set; }
 
-            Cuenta = new CuentaRepository(_Context);
-            Retiro = new RetiroRepository(_Context);
+        public ITipoCuentaRepository TipoCuentas { get; private set; }
+
+        public IEstadoDispensadorRepository EstadoDispensadores { get; private set; }
+
+        public IAtmRepository Atm { get; private set; }
+
+        public UnityOfWork(){
 
         }
 
+        public UnityOfWork(CajeroAutomaticoDBContext context)
+        {
 
+            _Context = context;
+
+            Clientes = new ClienteRepository(_Context);
+            Cuentas = new CuentaRepository(_Context);
+            DispensadorEfectivos = new DispensadorEfectivoRepository(_Context);
+            Retiros = new RetiroRepository(_Context);
+            TipoCuentas = new TipoCuentaRepository(_Context);
+            Atm = new AtmRepository(_Context);
+            EstadoDispensadores = new EstadoDispensadorRepository(_Context);
+        }
+
+        /*
         public static UnityOfWork Instance
         {
             get
@@ -43,8 +65,7 @@ namespace CajeroAutomatico.Persistencia.Repositories
                 return _Instance;
             }
         }
-
-
+        */
 
         public void Dispose()
         {
@@ -57,6 +78,11 @@ namespace CajeroAutomatico.Persistencia.Repositories
         public int SaveChanges()
         {
             return _Context.SaveChanges();
+        }
+
+        public void StateModified(object Entity)
+        {
+            _Context.Entry(Entity).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }

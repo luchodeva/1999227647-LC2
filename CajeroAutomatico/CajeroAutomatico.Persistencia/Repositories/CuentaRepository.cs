@@ -1,11 +1,12 @@
-﻿using CajeroAutomatico1.Entidades.IRepositories;
-using CajeroAutomatico1.Entidades;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using CajeroAutomatico.Entities.Entities;
+using CajeroAutomatico.Entities.IRepositories;
 
 namespace CajeroAutomatico.Persistencia.Repositories
 {
@@ -13,19 +14,13 @@ namespace CajeroAutomatico.Persistencia.Repositories
     {
 
 
-        private readonly CajeroAutomaticoDBContext _Context;
-
         private  Cuenta cuenta;
 
-        private CuentaRepository() {
 
-
-        }
-
-        public CuentaRepository(CajeroAutomaticoDBContext context)
+        public CuentaRepository(CajeroAutomaticoDBContext context) : base(context)
         {
+     
 
-            _Context = context;
         }
 
 

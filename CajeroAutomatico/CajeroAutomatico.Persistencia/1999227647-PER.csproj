@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70C2A97B-00D2-4D40-9D5F-4BB1D5E86107}</ProjectGuid>
+    <ProjectGuid>{891A4D38-842E-445A-80AC-622C44E8FDA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CajeroAutomatico.Persistencia</RootNamespace>
-    <AssemblyName>1999227647.Persistencia</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>1999227647-PER</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,30 +48,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CajeroAutomaticoDBContext.cs" />
-    <Compile Include="Migrations\201705192355545_InitialModel.cs" />
-    <Compile Include="Migrations\201705192355545_InitialModel.Designer.cs">
-      <DependentUpon>201705192355545_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201706102308339_Initial.cs" />
+    <Compile Include="Migrations\201706102308339_Initial.Designer.cs">
+      <DependentUpon>201706102308339_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AtmRepository.cs" />
+    <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\CuentaRepository.cs" />
+    <Compile Include="Repositories\DispensadorEfectivoRepository.cs" />
+    <Compile Include="Repositories\EstadoDispensadorRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RetiroRepository.cs" />
+    <Compile Include="Repositories\TipoCuentaRepository.cs" />
     <Compile Include="Repositories\UnityOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CajeroAutomatico.Entities\1999227647-ENT.csproj">
+      <Project>{d68bd4a7-4622-4ccb-8251-1ba46f0fdf48}</Project>
+      <Name>1999227647-ENT</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CajeroAutomatico1.Entidades\1999227647-ENT.csproj">
-      <Project>{bf2c4e45-a5cd-4f91-83ec-77cc8bbecd5d}</Project>
-      <Name>1999227647-ENT</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705192355545_InitialModel.resx">
-      <DependentUpon>201705192355545_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706102308339_Initial.resx">
+      <DependentUpon>201706102308339_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
